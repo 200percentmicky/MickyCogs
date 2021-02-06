@@ -13,7 +13,7 @@ class ChronosDelta(commands.Cog):
     """
 
     guild_defaults = {
-        "timezone": "America/Indiana/Tell_City",
+        "timezone": "UTC",
         "channel": None # A visual clock utilizing a locked voice channel. Will deal with later...
     }
 
