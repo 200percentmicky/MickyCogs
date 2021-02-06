@@ -178,6 +178,3 @@ class ChronosDelta(commands.Cog):
                 tz=timezone,
                 url="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones"
             ))
-
-def setup(bot):
-    bot.add_cog(ChronosDelta(bot))
