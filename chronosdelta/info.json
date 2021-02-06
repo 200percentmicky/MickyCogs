@@ -1,0 +1,13 @@
+{
+  "author": "Micky-kun",
+  "description": "A fully functioning clock for your Discord server.",
+  "install_msg": "✅ **Thanks for install Chronos Delta on your bot.** Run `[p]time` to show your server's current time. Use `[p]settimezone server` to set a time zone.",
+  "short": "A fully functioning clock for your Discord server.",
+  "requirements": [
+    "pytz"
+  ],
+  "tags": [
+    "clock",
+    "time"
+  ]
+}
