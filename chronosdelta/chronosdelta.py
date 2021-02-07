@@ -136,7 +136,7 @@ class ChronosDelta(commands.Cog):
     
     @settimezone.command(name="server")
     @checks.has_permissions(manage_guild=True)
-    async def server(self, ctx: commands.Context, *, timezone):
+    async def server(self, ctx: commands.Context, *, timezone = None):
         """
         Sets the server's time zone.
         """
@@ -148,7 +148,7 @@ class ChronosDelta(commands.Cog):
                 tz=timezone
             ))
         else:
-            if timezone is None or "off":
+            if timezone is None:
                 await self.config.guild(ctx.guild).timezone.set("UTC")
                 return await ctx.send("✅ The time zone for **{guild}** is now `UTC`".format( # Hard coded. lol
                     guild=ctx.guild.name
@@ -159,7 +159,7 @@ class ChronosDelta(commands.Cog):
             ))
 
     @settimezone.command(name="user")
-    async def user(self, ctx: commands.Context, *, timezone):
+    async def user(self, ctx: commands.Context, *, timezone = None):
         """
         Sets a time zone for yourself.
 
@@ -171,9 +171,9 @@ class ChronosDelta(commands.Cog):
             await self.config.user(ctx.author).timezone.set(timezone)
             return await ctx.send("✅ Done. Your time zone is now `{tz}`".format(tz=timezone))
         else:
-            if timezone is None or "off":
+            if timezone is None:
                 await self.config.user(ctx.author).timezone.set(None)
-                return await ctx.send("✅ Done. You no longer have a time zone set.")
+                return await ctx.send("ℹ Your time zone has been removed successfully.")
             await ctx.send("❌ `{tz}` is not valid time zone. Please visit **{url}** for a list of compatible time zones.".format(
                 tz=timezone,
                 url="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones"
