@@ -50,22 +50,19 @@ class RPGDice(commands.Cog):
             result = r.result
             total = r.total
 
-            msg = f"{ctx.author.mention}  |  :game_die: **{total}**"
+            msg = f":game_die: **{total}**"
             
             if len(result) < 2000:
                 embed = discord.Embed(
                     color=0xFFFFFF,
                     description=result
                 )
-                await ctx.send(content=msg, embed=embed)
+                await ctx.reply(content=msg, embed=embed)
             else:
-                await ctx.send(msg)
+                await ctx.reply(msg)
         except d20.TooManyRolls:
-            await ctx.send(f":warning: {ctx.author.mention}, that's too much dice! Please roll a lower number.")
+            await ctx.reply(content=f":warning: That's too many dice to handle! Please roll a lower number.", mention_author=False)
             return
         except d20.RollError:
-            await ctx.send(f":x: `{dice_expression}` is not a valid dice expression.")
+            await ctx.reply(f":x: `{dice_expression}` is not a valid dice expression.", mention_author=False)
             return
-
-def setup(bot):
-    bot.add_cog(RPGDice(bot))
