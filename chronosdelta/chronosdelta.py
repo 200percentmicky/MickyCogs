@@ -40,8 +40,12 @@ class ChronosDelta(commands.Cog):
         To specify a time zone for your server, use `[p]settimezone server`.
         """
         timezone_setting = await self.config.guild(ctx.guild).timezone()
+
         if user:
             timezone_setting = await self.config.user(user).timezone()
+            if timezone_setting is None:
+                return await ctx.send("⚠ That user doesn't have a timezone")
+
         time_zone = pytz.timezone(timezone_setting)
         current = datetime.now(tz=time_zone)
         date = current.strftime("%A, %B %d, %Y")
@@ -93,17 +97,6 @@ class ChronosDelta(commands.Cog):
             embed.set_footer(
                 text="Time Zone: {tz}".format(tz=time_zone if timezone_setting is not None else "UTC")
             )
-
-            if user:
-                if ctx.guild.get_member(user.id) is None:
-                    return await ctx.send("⚠ That user is not a member of this server, or that's not a valid user.")
-                if timezone_setting is None:
-                    return await ctx.send("⚠ That user doesn't have a time zone set.")
-                try:
-                    await ctx.message.add_reaction(emoji_clock[hour])
-                except discord.Forbidden:
-                    pass
-                return await ctx.reply(embed=embed, delete_after=10, mention_author=True)
 
             try:
                 await ctx.message.add_reaction(emoji_clock[hour])
