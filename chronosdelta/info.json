@@ -5,7 +5,7 @@
   "description": "A fully functioning clock for your Discord server.",
   "install_msg": "✅ **Thanks for installing Chronos Delta to your bot.** Run `[p]time` to show your server's current time. Use `[p]settimezone server` to set a time zone.",
   "short": "A fully functioning clock for your Discord server.",
-  "end_user_data_statement": "This cog stores user IDs in case a user sets a timezone for themselves. They can remove it by simply running '[p]settimezone user' as is. The same happens for Guild IDs in case a time zone is set for the server, and can be removed by running '[p]settimezone server' as is.",
+  "end_user_data_statement": "This cog stores user IDs and guild IDs if they want to set a time zone for themselves or for the server. The user can remove stored information by simply running '[p]settimezone user' or for the server '[p]settimezone server' as is.",
   "min_bot_version": "3.4.6",
   "requirements": [
     "pytz"
