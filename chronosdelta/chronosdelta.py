@@ -166,7 +166,7 @@ class ChronosDelta(commands.Cog):
             return await ctx.send("✅ Done. Your time zone is now `{tz}`".format(tz=timezone))
         else:
             if timezone is None:
-                await self.config.user(ctx.author).timezone.set(None)
+                await self.config.user(ctx.author).clear_raw()
                 return await ctx.send("ℹ Your time zone has been removed successfully.")
             await ctx.send("❌ `{tz}` is not valid time zone. Please visit **{url}** for a list of compatible time zones.".format(
                 tz=timezone,
