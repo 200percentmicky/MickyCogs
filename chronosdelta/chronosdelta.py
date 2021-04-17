@@ -13,8 +13,7 @@ class ChronosDelta(commands.Cog):
     """
 
     guild_defaults = {
-        "timezone": "UTC",
-        "channel": None # A visual clock utilizing a locked voice channel. Will deal with later...
+        "timezone": None
     }
 
     user_defaults = {
@@ -44,9 +43,9 @@ class ChronosDelta(commands.Cog):
         if user:
             timezone_setting = await self.config.user(user).timezone()
             if timezone_setting is None:
-                return await ctx.send("⚠ That user doesn't have a timezone")
+                return await ctx.send("⚠ That user doesn't have a timezone.")
 
-        time_zone = pytz.timezone(timezone_setting)
+        time_zone = pytz.timezone(timezone_setting if timezone_setting is not None else "UTC")
         current = datetime.now(tz=time_zone)
         date = current.strftime("%A, %B %d, %Y")
         time = current.strftime("%I:%M %p")
@@ -95,7 +94,7 @@ class ChronosDelta(commands.Cog):
             )
 
             embed.set_footer(
-                text="Time Zone: {tz}".format(tz=time_zone if timezone_setting is not None else "UTC")
+                text="Time Zone: {tz}".format(tz=time_zone)
             )
 
             try:
@@ -112,7 +111,7 @@ class ChronosDelta(commands.Cog):
                 date=date,
                 emoji=emoji_clock[hour],
                 time=time,
-                tz=time_zone if timezone_setting is not None else "UTC"
+                tz=time_zone
             ), delete_after=10)
 
     @commands.group()
@@ -163,7 +162,7 @@ class ChronosDelta(commands.Cog):
 
         if timezone in pytz.all_timezones:
             await self.config.user(ctx.author).timezone.set(timezone)
-            return await ctx.send("✅ Done. Your time zone is now `{tz}`".format(tz=timezone))
+            return await ctx.send("✅ Your time zone is now `{tz}`".format(tz=timezone))
         else:
             if timezone is None:
                 await self.config.user(ctx.author).clear_raw()
