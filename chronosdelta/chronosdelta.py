@@ -47,7 +47,7 @@ class ChronosDelta(commands.Cog):
 
         time_zone = pytz.timezone(timezone_setting if timezone_setting is not None else "UTC")
         current = datetime.now(tz=time_zone)
-        date = current.strftime("%A, %B %d, %Y".lstrip("0"))
+        date = current.strftime("%A, %B %d, %Y")
         time = current.strftime("%I:%M %p")
 
         emoji_clock = {
@@ -84,7 +84,7 @@ class ChronosDelta(commands.Cog):
                 description="📅 {date}\n{emoji} {time}".format(
                     date=date,
                     emoji=emoji_clock[hour],
-                    time=time
+                    time=time.lstrip("0")
                 )
             )
             
@@ -110,7 +110,7 @@ class ChronosDelta(commands.Cog):
             await ctx.reply("📅 {date}\n{emoji} {time}\n:globe_with_meridians: {tz}".format(
                 date=date,
                 emoji=emoji_clock[hour],
-                time=time,
+                time=time.lstrip("0"),
                 tz=time_zone
             ), delete_after=10)
 
