@@ -47,7 +47,7 @@ class ChronosDelta(commands.Cog):
 
         time_zone = pytz.timezone(timezone_setting if timezone_setting is not None else "UTC")
         current = datetime.now(tz=time_zone)
-        date = current.strftime("%A, %B %d, %Y")
+        date = current.strftime("%A, %B %d, %Y".lstrip("0"))
         time = current.strftime("%I:%M %p")
 
         emoji_clock = {
