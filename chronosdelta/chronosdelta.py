@@ -136,17 +136,17 @@ class ChronosDelta(commands.Cog):
 
         if timezone in pytz.all_timezones:
             await self.config.guild(ctx.guild).timezone.set(timezone)
-            await ctx.send("✅ The time zone for **{guild}** is now `{tz}`".format(
+            await ctx.reply("✅ The time zone for **{guild}** is now `{tz}`".format(
                 guild=ctx.guild.name,
                 tz=timezone
             ))
         else:
             if timezone is None:
-                await self.config.guild(ctx.guild).timezone.set("UTC")
-                return await ctx.send("✅ The time zone for **{guild}** is now `UTC`".format( # Hard coded. lol
+                await self.config.guild(ctx.guild).clear_raw()
+                return await ctx.reply("✅ The time zone for **{guild}** is now `UTC`".format( # Hard coded. lol
                     guild=ctx.guild.name
                 ))
-            await ctx.send("❌ `{tz}` is not valid time zone. Please visit **{url}** for a list of compatible time zones.".format(
+            await ctx.reply("❌ `{tz}` is not valid time zone. Please visit **{url}** for a list of compatible time zones.".format(
                 tz=timezone,
                 url="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones"
             ))
@@ -162,12 +162,12 @@ class ChronosDelta(commands.Cog):
 
         if timezone in pytz.all_timezones:
             await self.config.user(ctx.author).timezone.set(timezone)
-            return await ctx.send("✅ Your time zone is now `{tz}`".format(tz=timezone))
+            return await ctx.reply("✅ Your time zone is now `{tz}`".format(tz=timezone))
         else:
             if timezone is None:
                 await self.config.user(ctx.author).clear_raw()
                 return await ctx.send("ℹ Your time zone has been removed successfully.")
-            await ctx.send("❌ `{tz}` is not valid time zone. Please visit **{url}** for a list of compatible time zones.".format(
+            await ctx.reply("❌ `{tz}` is not valid time zone. Please visit **{url}** for a list of compatible time zones.".format(
                 tz=timezone,
                 url="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones"
             ))
