@@ -41,6 +41,8 @@ class ChronosDelta(commands.Cog):
         timezone_setting = await self.config.guild(ctx.guild).timezone()
 
         if user:
+            if user == 'me':
+                user = ctx.author.id
             timezone_setting = await self.config.user(user).timezone()
             if timezone_setting is None:
                 return await ctx.send("⚠ That user doesn't have a timezone.")
