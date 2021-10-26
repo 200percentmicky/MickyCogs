@@ -18,7 +18,7 @@ class RPGDice(commands.Cog):
         """
         Rolls a dice expression.
 
-        **[Full Documentation](https://raw.githubusercontent.com/avrae/d20/master/README.md)**
+        **[Full Documentation](https://d20.readthedocs.io/en/latest/start.html#dice-syntax)**
 
         **Examples**
         4d6kh3 (4, 4, **6**, ~~3~~) = `14`
