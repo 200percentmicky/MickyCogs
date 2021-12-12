@@ -1,4 +1,5 @@
 from jishaku.cog import STANDARD_FEATURES
+from redbot.core import commands
 
-class RedJishaku(*STANDARD_FEATURES):
+class RedJishaku(commands.Cog, *STANDARD_FEATURES):
     pass
