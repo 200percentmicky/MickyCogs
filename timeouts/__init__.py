@@ -1,5 +1,6 @@
 from .timeouts import Timeouts
 
 async def setup(bot):
-    await Timeouts().initialize(bot)
-    bot.add_cog(Timeouts(bot))
+    cog = Timeouts(bot)
+    bot.add_cog(cog)
+    cog.initialize()
