@@ -1,5 +1,6 @@
 import aiohttp
 import datetime
+import discord
 
 from redbot.core import commands, modlog, checks
 
