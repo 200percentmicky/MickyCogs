@@ -16,8 +16,8 @@ async def timeout_user(bot, user_id: int, guild_id: int, until):
     timeout = (datetime.datetime.utcnow() + datetime.timedelta(minutes=until)).isoformat()
     params = {'communication_disabled_until': timeout}
     async with aiohttp.ClientSession() as session:
-        async with session.patch(url, params=params, headers=headers) as response:
-            if response.status in range(200, 299):
+        async with session.patch(url, params=params, headers=headers):
+            if session.status in range(200, 299):
                 return True
             return False
 
