@@ -51,7 +51,7 @@ class Timeouts(commands.Cog):
         `[reason]` The reason for the timeout.
         """
         handshake = await timeout_user(self.bot, user_id=member.id, guild_id=ctx.guild.id, until=until)
-        async with ctx typing():
+        async with ctx.typing():
             if handshake:
                 await modlog.create_case(
                     ctx.bot, ctx.guild, ctx.message.created_at, action_type="timeout",
