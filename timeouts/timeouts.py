@@ -79,7 +79,7 @@ class Timeouts(commands.Cog):
         For this command to work, you need to have a mod role set, or use the permissions cog to adjust access accordingly.
         """
 
-        if ctx.author.id == ctx.user.id:
+        if ctx.author.id == member.id:
             return await ctx.send(":warning: You can't place yourself on timeout.")
 
         try:
@@ -108,7 +108,7 @@ class Timeouts(commands.Cog):
         For this command to work, you need to have a mod role set, or use the permissions cog to adjust access accordingly.
         """
 
-        if ctx.author.id == ctx.user.id:
+        if ctx.author.id == member.id:
             return await ctx.send(":warning: You can't place yourself on timeout.")
 
         try:
