@@ -1,9 +1,28 @@
+from ast import NotIn
 from datetime import datetime, timedelta
 import discord
 
 from redbot.core import commands, modlog, checks
 
-async def timeout_payload(until: int = None):
+class InTimeout(Exception):
+    """
+    Exception for when a member is on timeout.
+    """
+    pass
+
+class NotInTimeout(Exception):
+    """
+    Exception for when a member is not in timeout.
+    """
+    pass
+
+class TimeExceeded(Exception):
+    """
+    Raised when the time provided exceeds the limits of 28 days. (40320 minutes)
+    """
+    pass
+
+def timeout_payload(until: int = None):
     """
     Initial payload to provide to the API.
     """
@@ -15,11 +34,13 @@ async def timeout_user(bot, user_id: int, guild_id: int, reason: str, until):
     """
     Timeout users in minutes.
     """
+    if until > 40320:
+        raise TimeExceeded()
     member = await bot.http.get_member(guild_id, user_id)
     if member['communication_disabled_until'] is None:
         return await bot.http.edit_member(guild_id, user_id, reason=reason, **timeout_payload(until))
     else:
-        raise discord.HTTPException("Communications for member is already restricted.")
+        raise InTimeout()
 
 async def untimeout_user(bot, user_id: int, guild_id: int, reason: str):
     """
@@ -29,7 +50,7 @@ async def untimeout_user(bot, user_id: int, guild_id: int, reason: str):
     if member['communication_disabled_until'] is not None:
         return await bot.http.edit_member(guild_id, user_id, reason=reason, **timeout_payload(None))
     else:
-        raise discord.HTTPException("Communications for member is not restricted.")
+        raise NotInTimeout()
 
 class Timeouts(commands.Cog):
     """
@@ -57,12 +78,12 @@ class Timeouts(commands.Cog):
                 "name": "remove_timeout",
                 "default_setting": True,
                 "image": "💥",
-                "case_str": "Timeout"
+                "case_str": "Undo Timeout"
             }
         ]
 
         try:
-            await modlog.register_casetype(timeout_types)
+            await modlog.register_casetypes(timeout_types)
         except RuntimeError:
             pass
 
@@ -80,7 +101,7 @@ class Timeouts(commands.Cog):
         """
 
         if ctx.author.id == member.id:
-            return await ctx.send(":warning: You can't place yourself on timeout.")
+            return await ctx.send("You can't place yourself on timeout.")
 
         try:
             async with ctx.typing():
@@ -90,11 +111,14 @@ class Timeouts(commands.Cog):
                     user=member, moderator=ctx.author, reason=reason,
                     until=datetime.utcnow() + timedelta(minutes=until)
                 )
-                await ctx.send(f":white_check_mark: Done. Time away will do good.")
+                await ctx.send("Done. Time away will do them good.")
         except discord.Forbidden:
-            return await ctx.send(":warning: I'm not allow to do that.")
-        except discord.HTTPException:
-            return await ctx.send(":warning: That user is already on timeout.")
+            await ctx.send("I'm not allow to do that.")
+        except TimeExceeded:
+            await ctx.send("Invalid time given. Max time is 28 days. (40320 minutes)")
+        except InTimeout:
+            await ctx.send("That member is already on timeout.")
+
 
     @commands.command()
     @checks.mod() # Recommended. The library doesn't have the "Moderate Members" permission stored, so bits will be used.
@@ -109,17 +133,18 @@ class Timeouts(commands.Cog):
         """
 
         if ctx.author.id == member.id:
-            return await ctx.send(":warning: You can't place yourself on timeout.")
+            return await ctx.send("You can't place yourself on timeout.")
 
         try:
             async with ctx.typing():
-                await timeout_user(self.bot, user_id=member.id, guild_id=ctx.guild.id, until=None, reason=reason)
+                await untimeout_user(self.bot, user_id=member.id, guild_id=ctx.guild.id, reason=reason)
                 await modlog.create_case(
                     ctx.bot, ctx.guild, ctx.message.created_at, action_type="remove_timeout",
                     user=member, moderator=ctx.author, reason=reason
                 )
-                await ctx.send(f":white_check_mark: Done. Time away will do good.")
+                await ctx.send(f"Done. Hope they learned their lesson.")
         except discord.Forbidden:
-            return await ctx.send(":warning: I'm not allow to do that.")
-        except discord.HTTPException:
-            return await ctx.send(":warning: That user isn't on timeout.")
+            await ctx.send("I'm not allow to do that.")
+        except NotInTimeout:
+            await ctx.send("That member is not in timeout.")
+
