@@ -55,8 +55,6 @@ async def untimeout_user(bot, user_id: int, guild_id: int, reason: str):
 class Timeouts(commands.Cog):
     """
     Timeouts for Red V3
-
-    For this cog to work, you need to have a mod role set, or use the permissions cog to adjust access accordingly.
     """
 
     def __init__(self, bot):
@@ -96,8 +94,6 @@ class Timeouts(commands.Cog):
         `<member>` The member you want to put on timeout.
         `<until>` How long the member should be on timeout in minutes.
         `[reason]` The reason for the timeout.
-
-        For this command to work, you need to have a mod role set, or use the permissions cog to adjust access accordingly.
         """
 
         if ctx.author.id == member.id:
@@ -128,8 +124,6 @@ class Timeouts(commands.Cog):
 
         `<member>` The member you want to remove the timeout from.
         `[reason]` The reason for removing their timeout.
-
-        For this command to work, you need to have a mod role set, or use the permissions cog to adjust access accordingly.
         """
 
         if ctx.author.id == member.id:

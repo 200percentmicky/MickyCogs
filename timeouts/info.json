@@ -1,7 +1,7 @@
 {
   "author": "Micky-kun",
   "description": "Timeouts for Red",
-  "install_msg": "⏲️ **Timeouts for Red V3**\nThanks for installing. Since timeouts are not native to discord.py, this cog is making a handshake response to the API. Once Red fully supports timeouts, this cog will be deprecated. This cog also writes to your guild mod log, if you have one set of course. This should make managing timeouts easier on your server. Anyway, enjoy the cog!",
+  "install_msg": "⏲️ **Timeouts for Red V3**\nThanks for installing. This should help out for a while until Red officially supports Timeouts. Since the permissions for this to work are not present in discord.py, make sure you set the mod role for your server, or use the permissions cog to provide access. Also, once Red fully supports Timeouts, this cog will be deprecated in favor of that. Anyway, enjoy the cog!",
   "short": "A simple dice parser.",
   "requirements": [
     "aiohttp"
