@@ -10,7 +10,7 @@ async def timeout_user(bot, user_id: int, guild_id: int, reason: str, until):
     """
     timeout = (datetime.datetime.utcnow() + datetime.timedelta(minutes=until)).isoformat()
     payload = {'communication_disabled_until': timeout}
-    await bot.http.edit_member(guild_id, user_id, reason, *payload)
+    await bot.http.edit_member(guild_id, user_id, reason=reason, **payload)
 
 class Timeouts(commands.Cog):
     """
