@@ -9,8 +9,8 @@ async def timeout_user(bot, user_id: int, guild_id: int, reason: str, until):
     Handshake to timeout users in minutes.
     """
     timeout = (datetime.datetime.utcnow() + datetime.timedelta(minutes=until)).isoformat()
-    params = {'communication_disabled_until': timeout}
-    await bot.http.edit_member(guild_id, user_id, reason, **until)
+    payload = {'communication_disabled_until': timeout}
+    await bot.http.edit_member(guild_id, user_id, reason, *payload)
 
 class Timeouts(commands.Cog):
     """
