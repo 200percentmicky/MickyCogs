@@ -4,9 +4,6 @@ import discord
 
 from redbot.core import commands, modlog, checks
 
-# https://stackoverflow.com/questions/70459488/discord-py-timeout-server-members
-# A handshake must be made to Discord since Timeouts aren't implemented in discord.py
-
 async def timeout_user(bot, user_id: int, guild_id: int, reason: str, until):
     """
     Handshake to timeout users in minutes.
@@ -50,8 +47,8 @@ class Timeouts(commands.Cog):
         `<until>` How long the member should be on timeout in minutes.
         `[reason]` The reason for the timeout.
         """
-        handshake = await timeout_user(self.bot, user_id=member.id, guild_id=ctx.guild.id, until=until)
         async with ctx.typing():
+            handshake = await timeout_user(self.bot, user_id=member.id, guild_id=ctx.guild.id, until=until, reason=reason)
             if handshake:
                 await modlog.create_case(
                     ctx.bot, ctx.guild, ctx.message.created_at, action_type="timeout",
