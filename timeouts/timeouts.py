@@ -1,4 +1,3 @@
-from ast import NotIn
 from datetime import datetime, timedelta
 import discord
 
@@ -26,7 +25,7 @@ def timeout_payload(until: int = None):
     """
     Initial payload to provide to the API.
     """
-    timeout = (datetime.utcnow() + timedelta(minutes=until)).isoformat() if until else None
+    timeout = (datetime.utcnow() + until).isoformat() if until else None
     payload = {'communication_disabled_until': timeout}
     return payload
 
@@ -34,11 +33,11 @@ async def timeout_user(bot, user_id: int, guild_id: int, reason: str, until):
     """
     Timeout users in minutes.
     """
-    if until > 40320:
+    if until > timedelta(days=28):
         raise TimeExceeded()
     member = await bot.http.get_member(guild_id, user_id)
     if member['communication_disabled_until'] is None:
-        return await bot.http.edit_member(guild_id, user_id, reason=reason, **timeout_payload(until))
+        return await bot.http.edit_member(guild_id, user_id, reason=reason, **timeout_payload(until - timedelta(seconds=1)))
     else:
         raise InTimeout()
 
@@ -70,13 +69,13 @@ class Timeouts(commands.Cog):
                 "name": "timeout",
                 "default_setting": True,
                 "image": "\N{TIMER CLOCK}",
-                "case_str": "Timeout"
+                "case_str": "Timed Mute"
             },
             {
                 "name": "remove_timeout",
                 "default_setting": True,
                 "image": "💥",
-                "case_str": "Undo Timeout"
+                "case_str": "Remove Timed Mute"
             }
         ]
 
@@ -87,7 +86,14 @@ class Timeouts(commands.Cog):
 
     @commands.command()
     @checks.mod() # Recommended. The library doesn't have the "Moderate Members" permission stored, so bits will be used.
-    async def timeout(self, ctx: commands.Context, member: discord.Member, until: int, *, reason: str = None):
+    async def timeout(
+        self,
+        ctx: commands.Context,
+        member: discord.Member,
+        until: commands.TimedeltaConverter, 
+        *,
+        reason: str = None
+    ):
         """
         Puts a member on timeout with the time specified in minutes.
 
@@ -105,13 +111,13 @@ class Timeouts(commands.Cog):
                 await modlog.create_case(
                     ctx.bot, ctx.guild, ctx.message.created_at, action_type="timeout",
                     user=member, moderator=ctx.author, reason=reason,
-                    until=datetime.utcnow() + timedelta(minutes=until)
+                    until=datetime.utcnow() + until - timedelta(seconds=1)
                 )
                 await ctx.send("Done. Time away will do them good.")
         except discord.Forbidden:
-            await ctx.send("I'm not allow to do that.")
+            await ctx.send("I'm not allow to do that for some reason.")
         except TimeExceeded:
-            await ctx.send("Invalid time given. Max time is 28 days. (40320 minutes)")
+            await ctx.send("Invalid time given. Max time is 28 days.")
         except InTimeout:
             await ctx.send("That member is already on timeout.")
 
@@ -141,4 +147,3 @@ class Timeouts(commands.Cog):
             await ctx.send("I'm not allow to do that.")
         except NotInTimeout:
             await ctx.send("That member is not in timeout.")
-
