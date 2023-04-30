@@ -36,7 +36,7 @@ async def timeout_user(bot, user_id: int, guild_id: int, reason: str, until):
     if until > timedelta(days=28):
         raise TimeExceeded()
     member = await bot.http.get_member(guild_id, user_id)
-    if member['communication_disabled_until'] is None:
+    if not member['communication_disabled_until']:
         return await bot.http.edit_member(guild_id, user_id, reason=reason, **timeout_payload(until - timedelta(seconds=1)))
     else:
         raise InTimeout()
@@ -46,7 +46,7 @@ async def untimeout_user(bot, user_id: int, guild_id: int, reason: str):
     Removes the timeout from the user.
     """
     member = await bot.http.get_member(guild_id, user_id)
-    if member['communication_disabled_until'] is not None:
+    if member['communication_disabled_until']:
         return await bot.http.edit_member(guild_id, user_id, reason=reason, **timeout_payload(None))
     else:
         raise NotInTimeout()
