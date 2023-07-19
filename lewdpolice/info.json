@@ -1,0 +1,15 @@
+{
+    "author": "200percentmicky",
+    "description": "Lewd Police - Image and video nsfw detection cog. Protecting and serving from the horny.",
+    "install_msg": "__**Lewd Police**__\n*Protecting and serving the community from the horny.*\n\nThe cog can be a resource hog, so make sure that you're bot is on good hardward. If you have any problems with the cog or to report a bug or a false positive, join my server and talk to me there, or make an issue on the repo.\nhttps://pbs.twimg.com/media/D3h0axQWkAEDEbz.jpg",
+    "short": "Image and video nsfw detection cog.",
+    "requirements": [
+      "nsfw_detector"
+    ],
+    "tags": [
+      "nsfw_filter",
+      "moderation",
+      "tensorflow",
+      "horny_begone"
+    ]
+  }
