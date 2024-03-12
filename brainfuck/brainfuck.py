@@ -41,7 +41,7 @@ class Brainfuck(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name=brainfuck)
+    @commands.command(name="brainfuck")
     async def brainfuck(self, ctx: commands.Context, *, syntax: str):
         """
         Interpret a string in brainfuck.
