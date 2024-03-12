@@ -1,0 +1,17 @@
+{
+  "author": [
+    "200percentmicky"
+  ],
+  "description": "A programming language that makes your brain hurt.",
+  "install_msg": "Brainfuck is hard to interpret. You should read about it [here](https://esolangs.org/wiki/Brainfuck)",
+  "short": "Brainfuck",
+  "end_user_data_statement": "This cog does not store any data.",
+  "min_bot_version": "3.5.0",
+  "requirements": [
+    "brainfuck-interpreter"
+  ],
+  "tags": [
+    "programming",
+    "tools"
+  ]
+}
