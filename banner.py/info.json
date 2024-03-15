@@ -1,0 +1,15 @@
+{
+  "author": [
+    "200percentmicky"
+  ],
+  "description": "Give your bot a banner image!",
+  "install_msg": "Thanks for installing!\n:warning: **Experimental:** Uses an undocumented endpoint and may change at any time.",
+  "short": "Banners",
+  "end_user_data_statement": "This cog does not store any data.",
+  "min_bot_version": "3.5.0",
+  "tags": [
+    "image",
+    "utilities",
+    "owner"
+  ]
+}
