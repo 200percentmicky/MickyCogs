@@ -47,7 +47,7 @@ class Banner(commands.Cog):
         }
 
         try:
-            await bot.http.edit_profile(image)
+            await self.bot.http.edit_profile(image)
         except discord.HTTPException as e:
             await ctx.send(f'An error occured in the request. {e}')
         except Exception as e:
