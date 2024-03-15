@@ -43,7 +43,7 @@ class Banner(commands.Cog):
         """
 
         image = {
-            banner: discord.utils._bytes_to_base64_data(await ctx.message.attachments[0].read())
+            "banner": discord.utils._bytes_to_base64_data(await ctx.message.attachments[0].read())
         }
 
         try:
