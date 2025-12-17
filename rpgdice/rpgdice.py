@@ -29,7 +29,7 @@ class RPGDice(commands.Cog):
         embed = discord.Embed(
             color=ctx.me.color,
             title=":game_die: Random stats",
-            description=f"{format_rolls}\n\nTotal: `{total}`"
+            description=f"{format_rolls}\nTotal: `{total}`"
         )
 
         await ctx.reply(embed=embed)
