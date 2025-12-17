@@ -54,7 +54,7 @@ class RPGDice(commands.Cog):
             
             if len(result) < 2000:
                 embed = discord.Embed(
-                    color=0xFFFFFF,
+                    color=ctx.me.color,
                     description=result
                 )
                 await ctx.reply(content=msg, embed=embed)
