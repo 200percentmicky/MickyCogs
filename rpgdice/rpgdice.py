@@ -20,14 +20,16 @@ class RPGDice(commands.Cog):
         """
 
         format_rolls = ""
+        total = 0
         for x in range(6):
             dice = d20.roll("4d6kh3")
+            total += dice.total
             format_rolls += f"{dice.result}\n"
         
         embed = discord.Embed(
             color=ctx.me.color,
             title=":game_die: Random stats",
-            description=format_rolls
+            description=f"{format_rolls}\n\nTotal: `{total}`"
         )
 
         await ctx.reply(embed=embed)
