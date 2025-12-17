@@ -14,6 +14,26 @@ class RPGDice(commands.Cog):
 
     @commands.command()
     @checks.bot_has_permissions(embed_links=True)
+    async def randchar(self, ctx):
+        """
+        Calculates stats for a random character by rolling `4d6kh3` 6 times.
+        """
+
+        format_rolls = ""
+        for x in range(6):
+            dice = d20.roll("4d6kh3")
+            format_rolls += f"{dice.result}\n"
+        
+        embed = discord.Embed(
+            color=ctx.me.color,
+            title=":game_die: Random stats",
+            description=format_rolls
+        )
+
+        await ctx.reply(embed=embed)
+
+    @commands.command()
+    @checks.bot_has_permissions(embed_links=True)
     async def roll(self, ctx, *, dice_expression):
         """
         Rolls a dice expression.
