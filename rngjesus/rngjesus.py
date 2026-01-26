@@ -4,6 +4,9 @@ from random import choice
 
 from redbot.core import commands, checks
 
+heads = 0
+tails = 0
+
 class RNGJesus(commands.Cog):
     """
     *In RNGJesus name we pray, amen.* 🙏✝️
@@ -26,8 +29,8 @@ class RNGJesus(commands.Cog):
         if flips:
             async with ctx.typing():
                 for i in range(flips):
-                    heads = 0
-                    tails = 0
+                    global heads
+                    global tails
 
                     if coin is "Heads":
                         heads += 1
