@@ -1,16 +1,29 @@
 import discord
 import d20
+from random import choice
 
 from redbot.core import commands, checks
 
-class RPGDice(commands.Cog):
+class RNGJesus(commands.Cog):
     """
-    RPG Dice
-    Built using Avrae's D20 library.
+    *In RNGJesus name we pray, amen.* 🙏✝️
+
+    A cog for RPG dice, and other RNG related stuff.
     """
     def __init__(self, bot):
         self.bot = bot
         self.bot.remove_command("roll")
+
+    @commands.command()
+    async def coin(self, ctx):
+        """
+        Tosses a coin.
+        """
+
+        coin = ["Heads", "Tails"]
+        result = choice(coin)
+
+        await ctx.reply(f"🪙 {result}")
 
     @commands.command()
     @checks.bot_has_permissions(embed_links=True)
