@@ -17,7 +17,7 @@ class RNGJesus(commands.Cog):
     @commands.command()
     async def coin(self, ctx, flips: int = None):
         """
-        Tosses a coin.
+        Tosses a coin once or multiple times.
         """
 
         coin = ["Heads", "Tails"]
