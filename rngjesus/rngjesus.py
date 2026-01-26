@@ -25,10 +25,10 @@ class RNGJesus(commands.Cog):
 
         if flips:
             async with ctx.typing():
-                heads = 0
-                tails = 0
-
                 for i in range(flips):
+                    heads = 0
+                    tails = 0
+
                     if coin is "Heads":
                         heads += 1
                     elif coin is "Tails":
