@@ -36,8 +36,8 @@ class RNGJesus(commands.Cog):
                         heads += 1
                     elif coin is "Tails":
                         tails += 1
-                    if i == flips - 1:
-                        await ctx.reply(f"🪙 `{heads}` **Heads** and `{tails}` **Tails**")
+                
+                await ctx.reply(f"🪙 `{heads}` **Heads** and `{tails}` **Tails**")
         else:
             await ctx.reply(f"🪙 **{result}**")
 
