@@ -24,16 +24,17 @@ class RNGJesus(commands.Cog):
         result = choice(coin)
 
         if flips:
-            heads = 0
-            tails = 0
+            async with ctx.typing():
+                heads = 0
+                tails = 0
 
-            for i in range(flips):
-                if coin is "Heads":
-                    heads += 1
-                elif coin is "Tails":
-                    tails += 1
-                if i == flips - 1:
-                    await ctx.reply(f"🪙 `{heads}` **Heads** and `{tails}` **Tails**")
+                for i in range(flips):
+                    if coin is "Heads":
+                        heads += 1
+                    elif coin is "Tails":
+                        tails += 1
+                    if i == flips - 1:
+                        await ctx.reply(f"🪙 `{heads}` **Heads** and `{tails}` **Tails**")
         else:
             await ctx.reply(f"🪙 **{result}**")
 
