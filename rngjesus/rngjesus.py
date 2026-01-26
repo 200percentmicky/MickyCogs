@@ -15,7 +15,7 @@ class RNGJesus(commands.Cog):
         self.bot.remove_command("roll")
 
     @commands.command()
-    async def coin(self, ctx):
+    async def coin(self, ctx, flips: int = None):
         """
         Tosses a coin.
         """
@@ -23,7 +23,19 @@ class RNGJesus(commands.Cog):
         coin = ["Heads", "Tails"]
         result = choice(coin)
 
-        await ctx.reply(f"🪙 {result}")
+        if flips:
+            heads = 0
+            tails = 0
+
+            for i in range(flips):
+                if coin is "Heads":
+                    heads += 1
+                elif coin is "Tails":
+                    tails += 1
+
+            await ctx.reply(f"🪙 `{heads}` **Heads** and `{tails}` **Tails**")
+        else:
+            await ctx.reply(f"🪙 **{result}**")
 
     @commands.command()
     @checks.bot_has_permissions(embed_links=True)
