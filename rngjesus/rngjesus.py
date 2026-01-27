@@ -4,9 +4,6 @@ from random import choice
 
 from redbot.core import commands, checks
 
-heads = 0
-tails = 0
-
 class RNGJesus(commands.Cog):
     """
     *In RNGJesus name we pray, amen.* 🙏✝️
@@ -24,21 +21,23 @@ class RNGJesus(commands.Cog):
         """
 
         coin = ["Heads", "Tails"]
-        result = choice(coin)
 
         if flips:
+            heads = 0
+            tails = 0
+
             async with ctx.typing():
                 for i in range(flips):
-                    global heads
-                    global tails
+                    result = choice(coin)
 
-                    if coin is "Heads":
+                    if result is "Heads":
                         heads += 1
-                    elif coin is "Tails":
+                    elif result is "Tails":
                         tails += 1
                 
                 await ctx.reply(f"🪙 `{heads}` **Heads** and `{tails}` **Tails**")
         else:
+            result = choice(coin)
             await ctx.reply(f"🪙 **{result}**")
 
     @commands.command()
