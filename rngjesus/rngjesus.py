@@ -23,6 +23,9 @@ class RNGJesus(commands.Cog):
         coin = ["Heads", "Tails"]
 
         if flips:
+            if flips > 10000000:
+                return ctx.reply("⚠️ Too many coins. Please try a lower number.")
+
             heads = 0
             tails = 0
 
