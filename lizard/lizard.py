@@ -12,16 +12,16 @@ class Lizard(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    def lizard(msg: discord.Message):
+        try:
+            msg.add_reaction("🦎")
+        except:
+            pass
+
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
         if message.author.bot:
             return
-
-        def lizard():
-            try:
-                message.add_reaction("🦎")
-            except:
-                pass
 
         lizard_check = randint(1, 20)
 
