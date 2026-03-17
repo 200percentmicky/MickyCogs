@@ -1,3 +1,5 @@
+import discord
+
 from redbot.core import commands
 from random import randint
 
@@ -11,7 +13,10 @@ class Lizard(commands.Cog):
         self.bot = bot
 
     @commands.Cog.listener()
-    async def on_message(self, message):
+    async def on_message(self, message: discord.Message):
+        if message.author.bot:
+            return
+
         def lizard():
             try:
                 message.add_reaction("🦎")
@@ -23,6 +28,5 @@ class Lizard(commands.Cog):
         if lizard_check == 20:
             lizard()
 
-        lizards = ["🦎", ":lizard:", "lizard"]
-        if any(l in message.content for l in lizards):
+        if "🦎" in message.content:
             lizard()
