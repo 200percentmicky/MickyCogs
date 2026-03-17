@@ -23,5 +23,6 @@ class Lizard(commands.Cog):
         if lizard_check == 20:
             lizard()
 
-        if "🦎" in message.content:
+        lizards = ["🦎", ":lizard:", "lizard"]
+        if any(l in message.content for l in lizards):
             lizard()
