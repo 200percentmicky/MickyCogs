@@ -12,10 +12,16 @@ class Lizard(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(message):
-        lizard = randint(1, 20)
-
-        if lizard == 20:
+        def lizard():
             try:
                 message.add_reaction("🦎")
             except:
                 pass
+
+        lizard_check = randint(1, 20)
+
+        if lizard_check == 20:
+            lizard()
+
+        if "🦎" in message.content:
+            lizard()
