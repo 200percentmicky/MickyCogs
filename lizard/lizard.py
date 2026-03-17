@@ -26,7 +26,7 @@ class Lizard(commands.Cog):
         lizard_check = randint(1, 20)
 
         if lizard_check == 20:
-            lizard()
+            self.lizard()
 
         if "🦎" in message.content:
-            lizard()
+            self.lizard()
