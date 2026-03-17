@@ -4,9 +4,9 @@ from random import choice
 
 from redbot.core import commands, checks
 
-class RNGJesus(commands.Cog):
+class RNGesus(commands.Cog):
     """
-    *In RNGJesus name we pray, amen.* 🙏✝️
+    *In RNGesus name we pray, amen.* 🙏✝️
 
     A cog for RPG dice, and other RNG related stuff.
     """

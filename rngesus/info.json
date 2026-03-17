@@ -1,7 +1,7 @@
 {
   "author": "200percentmicky",
   "description": "A cog for RPG dice, and other RNG related stuff.",
-  "install_msg": "🎲 **Thanks for installing RNGJesus!**\n*In RNGJesus name we pray, amen.*",
+  "install_msg": "🎲 **Thanks for installing RNGesus!**\n*In RNGesus name we pray, amen.*",
   "short": "A cog for RPG dice, and other RNG related stuff.",
   "requirements": [
     "d20"
