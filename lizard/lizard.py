@@ -28,7 +28,7 @@ class Lizard(commands.Cog):
         if lizard_check == 15:
             return _lizard()
 
-        multiple_lizards = ["🦎", ":lizard:", "lizard"]
+        multiple_lizards = ["🦎", ":lizard:"]
 
         if any(lizard in message.content for lizard in multiple_lizards):
             return _lizard()
