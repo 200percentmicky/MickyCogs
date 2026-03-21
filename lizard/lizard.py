@@ -3,12 +3,6 @@ import discord
 from redbot.core import commands
 from random import randint
 
-def _lizard(msg: discord.Message):
-    try:
-        msg.add_reaction("🦎")
-    except:
-        pass
-
 class Lizard(commands.Cog):
     """
     🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎🦎
@@ -18,17 +12,21 @@ class Lizard(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.Cog.listener()
-    async def on_message(self, message: discord.Message):
+    @commands.Cog.listener("on_message")
+    async def lizard(self, message: discord.Message):
         if message.author.bot:
             return
+        
+        async def insert_lizard():
+            try:
+                await message.add_reaction("🦎")
+            except:
+                pass
 
-        lizard_check = randint(1, 15)
+        lizard_check = randint(1, 20)
 
-        if lizard_check == 15:
-            return _lizard()
+        if lizard_check == 20:
+            await insert_lizard()
 
-        multiple_lizards = ["🦎", ":lizard:"]
-
-        if any(lizard in message.content for lizard in multiple_lizards):
-            return _lizard()
+        if "🦎" in message.content:
+            await insert_lizard()
